@@ -5,7 +5,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing .JPanel;
+import java.awt.Stroke;
+import java.awt.BasicStroke;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
@@ -19,11 +21,20 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 		Timer timer = new Timer(TIMER_DELAY, this);
 		timer.start();
 	}
+	
+	private void paintDottedLine(Graphics g) {
+	      Graphics2D g2d = (Graphics2D) g.create();
+	         Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
+	         g2d.setStroke(dashed);
+	         g2d.setPaint(Color.WHITE);
+	         g2d.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
+	         g2d.dispose();
+	 }
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.WHITE);
-		g.fillRect(20, 20, 100, 100);
+		paintDottedLine(g);
 	}
 
 	@Override
@@ -50,6 +61,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		update();
+		repaint();
 		
 	}
 
