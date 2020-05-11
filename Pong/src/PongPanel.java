@@ -27,6 +27,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 		setBackground(BACKGROUND_COLOUR);
 		Timer timer = new Timer(TIMER_DELAY, this);
 		timer.start();
+		addKeyListener(this);
+		setFocusable(true);
 	}
 	public void createObjects() {
 		ball = new Ball(getWidth(), getHeight());
@@ -43,6 +45,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
             break;
           }
           case Playing: {
+        	  moveObject(paddle1);
+        	  moveObject(paddle2);
         	  moveObject(ball);
         	  checkWallBounce();
               break;
@@ -87,10 +91,26 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 		g.fillRect(sprite.getXPosition(),sprite.getYPosition(),sprite.getWidth(),sprite.getHeight());
 	}	
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent event) {
+		if(event.getKeyCode() == KeyEvent.VK_W) {
+			paddle1.setYVelocity(-1);
+		}else if(event.getKeyCode() == KeyEvent.VK_S) {
+			paddle1.setYVelocity(1);
+		}
+		if(event.getKeyCode() == KeyEvent.VK_UP) {
+			paddle2.setYVelocity(-1);
+		}else if(event.getKeyCode() == KeyEvent.VK_DOWN) {
+			paddle2.setYVelocity(1);
+		}		
 	}
 	@Override
-	public void keyReleased(KeyEvent e) {
+	public void keyReleased(KeyEvent event) {
+		if(event.getKeyCode() == KeyEvent.VK_W || event.getKeyCode() == KeyEvent.VK_S) {
+			paddle1.setYVelocity(0);
+		}
+		if(event.getKeyCode() == KeyEvent.VK_UP || event.getKeyCode() == KeyEvent.VK_DOWN) {
+			paddle2.setYVelocity(0);
+		}		
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {		
