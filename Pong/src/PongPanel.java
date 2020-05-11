@@ -49,6 +49,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
         	  moveObject(paddle2);
         	  moveObject(ball);
         	  checkWallBounce();
+        	  checkPaddleBounce();
               break;
           }
           case GameOver: {
@@ -74,6 +75,14 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	          // Hit top or bottom of screen
 	          ball.setYVelocity(-ball.getYVelocity());
 	      }
+	}
+	private void checkPaddleBounce() {
+		if(ball.getXVelocity() < 0 && ball.getRectangle().intersects(paddle1.getRectangle())) {
+			ball.setXVelocity(BALL_MOVEMENT_SPEED);
+		}
+		if(ball.getXVelocity() > 0 && ball.getRectangle().intersects(paddle2.getRectangle())) {
+			ball.setXVelocity(-BALL_MOVEMENT_SPEED);
+		}
 	}
 	private void resetBall() {
 		ball.resetToInitialPosition();
