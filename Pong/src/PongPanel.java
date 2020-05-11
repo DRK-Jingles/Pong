@@ -12,7 +12,6 @@ import java.awt.BasicStroke;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
 public class PongPanel extends JPanel implements ActionListener, KeyListener{
 	
 	private final static Color BACKGROUND_COLOUR = Color.black;
