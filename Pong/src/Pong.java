@@ -13,13 +13,8 @@ public class Pong extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		add(new PongPanel());
+	}	
+	public static void main(String[] args) {		
+		new Pong();		
 	}
-	
-	public static void main(String[] args) {
-		
-		new Pong();
-		
-		
-	}
-
 }
